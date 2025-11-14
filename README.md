@@ -2,7 +2,7 @@
 
 Ansible es una herramienta de automatización de código abierto que permite la gestión y configuración de sistemas, aplicaciones y redes de manera sencilla y eficiente. Utiliza un enfoque basado en infraestructura como código (IaC), lo que permite definir configuraciones y despliegues y este se encargará de realizar las operaciones necesarias para lograr dicha configuración.
 
-Ansible utiliza **playbooks** para definir y ejecutar tareas de automatización de forma ordenada y reproducible. Además, organiza estas tareas en **roles**, que permiten agrupar playbooks, variables, plantillas y archivos relacionados, facilitando la reutilización y el mantenimiento de la infraestructura.
+Ansible utiliza **playbooks** para definir y ejecutar tareas de automatización de forma ordenada y reproducible. Además, organiza estas tareas en **roles**, que permiten agrupar *playbooks*, variables, plantillas y archivos relacionados, facilitando la reutilización y el mantenimiento de la infraestructura.
 
 ### Roles
 
