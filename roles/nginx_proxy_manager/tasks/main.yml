@@ -1,0 +1,45 @@
+---
+# tasks file for nginx_proxy_manager
+
+- name: Crear la red del proxy
+  ansible.builtin.docker_network:
+    name: proxy_network
+    driver: bridge
+    ipam_config:
+      - subnet: 192.168.1.0/24
+        gateway: 192.168.1.1
+    state: present
+
+- name: Añadir Portainer a la red del proxy
+  ansible.builtin.docker_container:
+    name: portainer
+    image: portainer/portainer-ce:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - name: bridge
+      - name: proxy_network
+
+- name: Lanzar contenedor NPM (Nginx Proxy Manager)
+  ansible.builtin.docker_container:
+    name: npm
+    image: jc21/nginx-proxy-manager:latest
+    state: started
+    restart_policy: unless-stopped
+    env:
+      TZ: Europe/Madrid
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+    networks:
+      - name: proxy_network

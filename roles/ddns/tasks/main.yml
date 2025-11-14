@@ -1,0 +1,14 @@
+---
+# tasks file for ddns
+
+- name: Ejecutar contenedor cloudflare-ddns
+  ansible.builtin.docker_container:
+    name: cloudflare-ddns
+    image: oznu/cloudflare-ddns:latest
+    state: started
+    restart_policy: always
+    env:
+      API_KEY: "{{ cloudflare_api_key }}"
+      ZONE: "{{ cloudflare_zone }}"
+      SUBDOMAIN: "{{ cloudflare_subdomain }}"
+      PROXIED: "{{ cloudflare_proxied }}"

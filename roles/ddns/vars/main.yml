@@ -1,0 +1,6 @@
+---
+# vars file for ddns
+cloudflare_api_key: "" # API key de Cloudflare
+cloudflare_zone: "" # Dominio o zona
+cloudflare_subdomain: "" # Subdominio
+cloudflare_proxied: "true" # o "false si no quieres usar el proxy de Cloudflare"

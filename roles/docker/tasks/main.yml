@@ -1,0 +1,20 @@
+---
+# tasks file for docker
+
+- name: Instalar Docker, python-docker y docker-compose
+  ansible.builtin.apt:
+    name: [ "docker.io", "python3-docker", "docker-compose" ]
+    state: present
+    update_cache: yes
+
+- name: Asegurar que el servicio Docker esté activo
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Añadir usuario al grupo "docker"
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes

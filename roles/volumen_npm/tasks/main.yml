@@ -1,0 +1,45 @@
+---
+# tasks file for volumen_npm
+
+- name: Obtener automáticamente el fichero comprimido de /files
+  set_fact:
+    fichero_comprimido: >-
+      {{
+        (
+          query('fileglob', role_path + '/files/*.tar.gz') +
+          query('fileglob', role_path + '/files/*.zip') +
+          query('fileglob', role_path + '/files/*.tar') +
+          query('fileglob', role_path + '/files/*.tgz')
+        ) | first | basename
+      }}
+
+- name: Copiar fichero comprimido con el volumen al servidor
+  ansible.builtin.copy:
+        src: "{{ fichero_comprimido }}"
+        dest: "{{ ruta_volumen }}/{{ fichero_comprimido }}"
+
+- name: Detener contenedor de NPM
+  ansible.builtin.docker_container:
+        name: npm
+        state: stopped
+
+- name: Borrar volumen "data" de NPM
+  ansible.builtin.file:
+    path: "{{ ruta_volumen }}/_data"
+    state: absent
+
+- name: Descomprimir fichero comprimido
+  ansible.builtin.unarchive:
+    src: "{{ ruta_volumen }}/{{ fichero_comprimido }}"
+    dest: "{{ ruta_volumen }}"
+    remote_src: yes
+
+- name: Eliminar el archivo comprimido del volumen
+  ansible.builtin.file:
+    path: "{{ ruta_volumen }}/{{ fichero_comprimido }}"
+    state: absent
+
+- name: Arrancar contenedor de NPM
+  ansible.builtin.docker_container:
+        name: npm
+        state: started

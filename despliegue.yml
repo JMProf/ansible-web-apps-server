@@ -1,0 +1,9 @@
+---
+- hosts: servers
+  become: yes
+  roles:
+    - docker
+    - portainer
+    - nginx_proxy_manager
+#    - ddns # Descomentar si quieres usar el rol de DDNS
+#    - volumen_npm # Descomentar si quieres usar el rol de restauración del volumen de NPM

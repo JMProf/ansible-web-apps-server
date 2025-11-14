@@ -1,0 +1,3 @@
+---
+# vars file for volumen_npm
+ruta_volumen: "/var/lib/docker/volumes/npm_data"
