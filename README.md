@@ -27,8 +27,10 @@ sudo apt install ansible
 2. Descarga el repositorio:
 
 ```Shell
-git clone https://github.com/JMProf/app-server-con-ansible
-cd app-server-con-ansible
+wget https://github.com/JMProf/ansible-web-apps-server/archive/main.zip
+unzip main.zip
+rm main.zip
+cd ansible-web-apps-server-main
 ```
 
 3. Edita el fichero `hosts.ini` con el servidor o servidores sobre los que quieras ejecutar los roles.

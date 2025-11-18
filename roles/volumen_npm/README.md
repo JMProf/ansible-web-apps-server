@@ -22,3 +22,26 @@ En el archivo comprimido debe encontrarse la carpeta `_data` con los ficheros de
 - El contenedor debe llamarse npm; si usas otro nombre, deberás parametrizarlo.
 
 - Si el volumen contiene configuraciones SSL, estas se restaurarán junto al resto de datos.
+
+### 🧰 Obtener archivo comprimido
+
+Para obtener el archivo comprimido que utiliza este rol es necesario localizar el volumen de datos de NPM. La ruta predeterminada para los volúmenes es `/var/lib/docker/volumes`, y es posible acceder como `root`, por lo que quizás necesites ejecutar previamente `sudo su`para poder moverte al directorio. 
+Una vez dentro, accede al volumen de datos de NPM y verás la carpeta `_data`. Esta es la carpeta a comprimir. Puedes hacerlo con el siguiente comando:
+
+```Shell
+tar -czvf volumen_npm.tar.gz _data
+```
+
+Para descargarlo posteriormente, muévelo a la `home` del usuario con el que realices la conexión SSH:
+
+```Shell
+mv volumen_npm.tar.gz /home/USUARIO
+```
+
+Una vez hecho, es el momento de descargar el fichero al ordenador local con SCP. Para ello ejecuta el siguiente comando desde una terminal:
+
+```Shell
+scp -i CLAVE.pem USUARIO@IP:volumen_npm.tar.gz .
+```
+
+Con esto ya tendrás la copia del volumen de datos en tu ordenador y podrás guardarlo en la carpeta `files` del rol cuando lo ejecutes.
