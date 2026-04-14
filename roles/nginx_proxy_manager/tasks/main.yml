@@ -25,6 +25,7 @@
     networks:
       - name: bridge
       - name: proxy_network
+        ipv4_address: 192.168.1.2
 
 - name: Lanzar contenedor NPM (Nginx Proxy Manager)
   ansible.builtin.docker_container:
@@ -43,3 +44,4 @@
       - npm_letsencrypt:/etc/letsencrypt
     networks:
       - name: proxy_network
+        ipv4_address: 192.168.1.3
