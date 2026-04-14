@@ -24,6 +24,13 @@ Los roles realizan las siguientes tareas:
 sudo apt update
 sudo apt install ansible
 ```
+
+Si la conexión SSH al servidor se hace mediante usuario y contraseña, es posible que también debas instalar sshpass:
+
+```Shell
+sudo apt install sshpass
+```
+
 2. Descarga el repositorio:
 
 ```Shell
