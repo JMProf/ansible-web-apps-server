@@ -35,7 +35,7 @@ tar -czvf volumen_npm.tar.gz _data
 Para descargarlo posteriormente, muévelo a la `home` del usuario con el que realices la conexión SSH:
 
 ```Shell
-mv volumen_npm.tar.gz /home/USUARIO
+mv volumen_npm.tar.gz ~
 ```
 
 Una vez hecho, es el momento de descargar el fichero al ordenador local con SCP. Para ello ejecuta el siguiente comando desde una terminal:
